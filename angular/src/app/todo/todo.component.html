@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <br>
+      <form (ngSubmit)="submit()" #form="ngForm">
+        <div class="d-inline-flex w-100">
+          <input 
+            type="text" 
+            class="form-control w-100" 
+            name="note" 
+            ngModel
+            required
+            [value]="selectedTodo?.note">
+          <button class="btn btn-primary ml-2" type="submit">
+            {{selectedTodo ? "Update" : "Create"}}
+          </button>
+          <button 
+            *ngIf="selectedTodo"
+            class="btn btn-light ml-2" 
+            type="button"
+            (click)="unselectTodo()">
+            Cancel
+          </button>
+        </div>
+      </form>
+      <br>
+      <h4>Todos list</h4>
+      <ul class="list-group">
+        <li 
+          class="list-group-item p-2 pl-3 d-flex justify-content-between align-items-center" 
+          *ngFor="let todo of todos">
+          {{todo.note}}
+          <div class="pl-3">
+            <button
+              type="button" 
+              class="btn btn-light btn-sm mr-2" 
+              (click)="selectTodo(todo)">
+              Edit
+            </button>
+            <button
+              type="button" 
+              class="btn btn-danger btn-sm" 
+              (click)="deleteTodo(todo.id)">
+              Delete
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
